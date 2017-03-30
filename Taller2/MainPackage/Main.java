@@ -22,6 +22,14 @@ public class Main extends PApplet {
 		background(255);
 		log.ejecutar();
 	}
+	
+	public void keyPressed(){
+	log.key();	
+	}
+	
+	public void mousePressed() {
+		log.click();
+	}
 
 }
 
