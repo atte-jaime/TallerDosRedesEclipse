@@ -11,7 +11,7 @@ import java.net.MulticastSocket;
 import java.net.SocketTimeoutException;
 import java.util.Observable;
 
-import CommonAndroid.MensajeID;
+import CommonAndroid.*;
 
 public class Comunicacion extends Observable implements Runnable {
 
@@ -59,6 +59,9 @@ public class Comunicacion extends Observable implements Runnable {
 				}
 			}
 		} catch (SocketTimeoutException e) {
+			if (id == 0) {
+				id = 1;
+			}
 			identificado = true;
 			System.out.println("Mi id es:" + id);
 			s.setSoTimeout(0);
@@ -126,6 +129,18 @@ public class Comunicacion extends Observable implements Runnable {
 								if (contenido.contains("soy nuevo")) {
 									enviar(new MensajeID("soy:" + id), GROUP_ADDRESS);
 								}
+							}
+							
+							if (deserialize(paquete.getData()) instanceof Nombre) {
+								setChanged();
+								notifyObservers((Nombre) deserialize(paquete.getData()));
+								clearChanged();
+							}
+							
+							if (deserialize(paquete.getData()) instanceof Anadir) {
+								setChanged();
+								notifyObservers((Anadir) deserialize(paquete.getData()));
+								clearChanged();
 							}
 						}
 					}

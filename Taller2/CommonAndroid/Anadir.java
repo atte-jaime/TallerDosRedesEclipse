@@ -2,15 +2,15 @@ package CommonAndroid;
 
 import java.io.Serializable;
 
-public class Añadir implements Serializable {
+public class Anadir implements Serializable {
 	
 	// el tipo representa si es un orbe o un depredador
 	// el receptor es el usuario
 	
     private int receptor;
-    private int tipo;
+    private int tipo; // 1=depredador 2=orbe
 
-    public Añadir(int receptor, int tipo) {
+    public Anadir(int receptor, int tipo) {
         this.receptor = receptor;
         this.tipo = tipo;
 
